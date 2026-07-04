@@ -14,8 +14,9 @@ export function Pingo({
 }) {
   // real image override (only for the full-color mascot, not the card silhouette)
   if (brand.pingoImage && !silhouette) {
+    // width drives size; height auto keeps the image's real aspect ratio (no squish)
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={brand.pingoImage} alt="Pingo" width={size} height={size} className={className} style={{ objectFit: "contain" }} />;
+    return <img src={brand.pingoImage} alt="Pingo" width={size} className={className} style={{ width: size, height: "auto" }} />;
   }
 
   if (silhouette) {

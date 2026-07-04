@@ -51,7 +51,7 @@ export function Footer() {
         </div>
         {/* one Pingo peeking over the wordmark */}
         <div className="absolute bottom-0 right-[8%] md:right-[14%]">
-          <Pingo size={72} />
+          <Pingo size={84} />
         </div>
       </div>
     </footer>

@@ -34,7 +34,7 @@ export const brand = {
   // --- Pingo mascot ---
   // Want a real penguin image? Drop a PNG/SVG in /public (e.g. public/pingo.png)
   // and set this to "/pingo.png". Leave null to use the built-in vector Pingo.
-  pingoImage: null as string | null,
+  pingoImage: "/pingo.png" as string | null,
 
   // --- Hero card back (configurable) ---
   cardBack: {

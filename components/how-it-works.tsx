@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { brand } from "@/config/brand";
 import { SectionHeading } from "@/components/ui/section";
-import { Pingo } from "@/components/ui/pingo";
 import { Check } from "@/components/ui/icons";
 
 const steps = [
@@ -82,9 +81,6 @@ function BuildCard({ stage, reduce }: { stage: number; reduce: boolean | null })
               )}
             </AnimatePresence>
           </div>
-          <AnimatePresence>{stage >= 2 && (
-            <motion.div key="pingo" {...pop} exit={{ opacity: 0 }} transition={spr}><Pingo size={44} silhouette /></motion.div>
-          )}</AnimatePresence>
         </div>
       </div>
 

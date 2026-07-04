@@ -75,19 +75,19 @@ export function Waitlist() {
       {/* drifting colony in the background */}
       {!reduce &&
         [
-          { l: "6%", t: "18%", s: 40, d: 6, delay: 0 },
-          { l: "88%", t: "26%", s: 52, d: 7, delay: 1 },
-          { l: "12%", t: "72%", s: 34, d: 8, delay: 0.6 },
-          { l: "82%", t: "70%", s: 44, d: 6.5, delay: 1.4 },
+          { l: "5%", t: "16%", s: 64, d: 6, delay: 0, o: 0.6 },
+          { l: "86%", t: "22%", s: 84, d: 7, delay: 1, o: 0.7 },
+          { l: "10%", t: "70%", s: 52, d: 8, delay: 0.6, o: 0.5 },
+          { l: "84%", t: "68%", s: 70, d: 6.5, delay: 1.4, o: 0.6 },
         ].map((p, i) => (
           <motion.div
             key={i}
-            className="pointer-events-none absolute opacity-[0.12]"
-            style={{ left: p.l, top: p.t }}
+            className="pointer-events-none absolute"
+            style={{ left: p.l, top: p.t, opacity: p.o }}
             animate={{ y: [0, -14, 0] }}
             transition={{ duration: p.d, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
           >
-            <Pingo size={p.s} silhouette />
+            <Pingo size={p.s} />
           </motion.div>
         ))}
 

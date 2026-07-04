@@ -16,7 +16,7 @@ export function Pingo({
   if (brand.pingoImage && !silhouette) {
     // width drives size; height auto keeps the image's real aspect ratio (no squish)
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={brand.pingoImage} alt="Pingo" width={size} className={className} style={{ width: size, height: "auto" }} />;
+    return <img src={brand.pingoImage} alt="Pingo" width={size} className={className} style={{ width: size, maxWidth: "100%", height: "auto" }} />;
   }
 
   if (silhouette) {

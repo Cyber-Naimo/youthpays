@@ -12,7 +12,7 @@ export const brand = {
 
   // --- Contact / links ---
   email: "admin@youthpay.pk",
-  domain: "youthpay.pk", // used in share links: https://<domain>/?ref=...
+  domain: "getyouthpay.com", // used in share links: https://<domain>/?ref=...
 
   // --- Launch + traction ---
   launch: "Soon",

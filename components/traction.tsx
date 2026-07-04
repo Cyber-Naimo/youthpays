@@ -6,11 +6,11 @@ import { CountUp } from "@/components/ui/count-up";
 export function Traction() {
   return (
     <Section id="traction">
-      <SectionHeading eyebrow="Growing fast" title={<><CountUp to={brand.waitlistSeed} /> teens. Zero ads.</>} />
+      <SectionHeading eyebrow="Growing fast" title={<><CountUp from={brand.waitlistSeed} to={brand.waitlistSeed} /> teens. Zero ads.</>} />
 
       <div className="mx-auto grid max-w-[720px] gap-4 sm:grid-cols-3">
         {[
-          { num: <><CountUp to={brand.waitlistSeed} />+</>, cap: "Teens joined" },
+          { num: <><CountUp from={brand.waitlistSeed} to={brand.waitlistSeed} />+</>, cap: "Teens joined" },
           { num: "0", cap: "Money on ads" },
           { num: brand.launch, cap: "We launch" },
         ].map((s, i) => (

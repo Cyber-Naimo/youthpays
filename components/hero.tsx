@@ -36,7 +36,7 @@ export function Hero() {
                 Claim your spot <ArrowRight />
               </a>
               <span className="text-[14px] font-semibold text-ink2">
-                <b className="text-navy"><CountUp to={brand.waitlistSeed} />+</b> teens joined
+                <b className="text-navy"><CountUp from={brand.waitlistSeed} to={brand.waitlistSeed} />+</b> teens joined
               </span>
             </div>
           </Reveal>

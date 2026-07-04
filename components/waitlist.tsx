@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { brand } from "@/config/brand";
 import { Reveal } from "@/components/ui/reveal";
@@ -21,6 +21,15 @@ export function Waitlist() {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState<null | { position: number; ref: string }>(null);
   const [copied, setCopied] = useState(false);
+  const [liveCount, setLiveCount] = useState<number | null>(null);
+
+  // live "displayed" count from the API (seed + real signups)
+  useEffect(() => {
+    fetch("/api/waitlist")
+      .then((r) => r.json())
+      .then((d) => { if (typeof d?.displayed === "number") setLiveCount(d.displayed); })
+      .catch(() => {});
+  }, []);
 
   const shareUrl = done ? `https://${brand.domain}/?ref=${done.ref}` : "";
   const waHref = done
@@ -97,7 +106,7 @@ export function Waitlist() {
           <h2 className="h2 mt-3 text-white">Join Pingo&apos;s herd.</h2>
           <p className="mt-3 text-[16px]" style={{ color: "rgba(250,247,239,.72)" }}>
             Be the first penguin. Launching {brand.launch}. You&apos;ll be around{" "}
-            <b className="text-gold">#<CountUp to={brand.waitlistSeed + 1} /></b>.
+            <b className="text-gold">#<CountUp from={brand.waitlistSeed} to={(liveCount ?? brand.waitlistSeed) + 1} /></b>.
           </p>
         </Reveal>
 
@@ -229,7 +238,7 @@ export function Waitlist() {
               <div className="px-8 pb-8 text-center">
                 <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">Your spot</span>
                 <div className="font-display text-[52px] font-black leading-none text-red tshadow-navy">
-                  #<CountUp to={done.position} />
+                  #<CountUp from={brand.waitlistSeed} to={done.position} />
                 </div>
                 <p className="mx-auto mt-3 max-w-[300px] text-[14px] text-ink2">Share your link — every friend who joins moves you up the line.</p>
                 <div className="mt-5 flex flex-wrap justify-center gap-3">

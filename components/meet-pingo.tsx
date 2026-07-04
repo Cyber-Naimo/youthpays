@@ -23,54 +23,52 @@ export function MeetPingo() {
     <Section id="pingo">
       <Reveal>
         <div
-          className="grid items-center gap-8 rounded-[16px] border-2 border-navy p-6 sm:p-10 md:grid-cols-2 md:gap-12 md:p-12"
+          className="rounded-[16px] border-2 border-navy p-6 sm:p-10 md:p-12"
           style={{ background: "var(--color-gold)", boxShadow: "8px 8px 0 var(--color-red)" }}
         >
           {/* copy */}
-          <div className="text-center md:text-left md:pr-4">
+          <div className="mx-auto max-w-[560px] text-center">
             <span className="label" style={{ color: "var(--color-navy)" }}>Meet Pingo</span>
             <h2 className="h2 mt-4 text-navy">Say hi to your money buddy.</h2>
-            <p className="mx-auto mt-5 max-w-[420px] text-[17px] font-medium leading-[1.6] text-navy/80 md:mx-0">
+            <p className="mx-auto mt-4 max-w-[440px] text-[17px] font-medium leading-[1.6] text-navy/80">
               Pingo brings you Pakistan&apos;s first teen card, in your name.
               Tap in, waddle over, and join the herd.
             </p>
-            <a href="#waitlist" className="btn btn-primary btn-lg mt-8">
+            <a href="#waitlist" className="btn btn-primary btn-lg mt-7">
               Claim your spot <ArrowRight />
             </a>
           </div>
 
-          {/* card left, Pingo right — scales with the column width so it fits any screen */}
-          <div className="flex flex-col items-center">
-            {/* speech bubble. mb-* = gap below · sm:ml-* = shift toward Pingo on wider screens */}
-            <div className="relative z-30 mb-2 sm:ml-24">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={i}
-                  initial={reduce ? false : { opacity: 0, y: 8, scale: 0.85 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={reduce ? undefined : { opacity: 0, scale: 0.85 }}
-                  transition={{ type: "spring", stiffness: 320, damping: 20 }}
-                  className="whitespace-nowrap rounded-[14px] bg-navy px-5 py-3 font-display text-[15px] font-extrabold leading-none text-cream"
-                >
-                  {lines[i]}
-                </motion.div>
-              </AnimatePresence>
+          {/* scene — card + Pingo side by side, wraps to stack on small screens */}
+          <div className="mt-10 flex flex-wrap items-end justify-center gap-6 sm:gap-10">
+            {/* card — flippable (same as hero), full design size so content fits */}
+            <div className="mb-3 w-full max-w-[300px]">
+              <CardMockup />
             </div>
 
-            <div className="flex w-full items-end justify-center gap-2 md:gap-4">
-              {/* card — flippable (same as hero) */}
-              <div className="mb-4 w-[46%] max-w-[280px] shrink-0">
-                <CardMockup />
+            {/* Pingo + bubble */}
+            <div className="flex w-full max-w-[300px] flex-col items-center">
+              <div className="relative z-30 mb-2">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={i}
+                    initial={reduce ? false : { opacity: 0, y: 8, scale: 0.85 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={reduce ? undefined : { opacity: 0, scale: 0.85 }}
+                    transition={{ type: "spring", stiffness: 320, damping: 20 }}
+                    className="whitespace-nowrap rounded-[14px] bg-navy px-5 py-3 font-display text-[15px] font-extrabold leading-none text-cream"
+                  >
+                    {lines[i]}
+                  </motion.div>
+                </AnimatePresence>
               </div>
-
-              {/* Pingo — scales to its container (image has max-width:100%) */}
               <motion.div
-                className="w-[46%] max-w-[320px] shrink-0"
+                className="w-[280px] max-w-full"
                 animate={reduce ? undefined : { rotate: [0, -5, 5, -3, 0], y: [0, -7, 0] }}
                 transition={{ rotate: { duration: 1.8, repeat: Infinity, repeatDelay: 1.2, ease: "easeInOut" }, y: { duration: 2.4, repeat: Infinity, ease: "easeInOut" } }}
                 style={{ transformOrigin: "bottom center" }}
               >
-                <Pingo size={320} className="drop-shadow-[5px_5px_0_rgba(15,25,37,0.18)]" />
+                <Pingo size={280} className="drop-shadow-[5px_5px_0_rgba(15,25,37,0.18)]" />
               </motion.div>
             </div>
           </div>

@@ -131,7 +131,7 @@ export function Problem() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="lede mt-5 max-w-[420px]">
-              You earned the money. But it sits in a parent&apos;s account — so every
+              You earned the money. But it sits in a parent&apos;s account, so every
               time you spend, you wait, you ask, you explain.
             </p>
           </Reveal>

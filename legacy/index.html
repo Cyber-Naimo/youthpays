@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{brand}} — {{tagline}}</title>
+  <meta name="description" content="{{brand}} is Pakistan's first card and wallet built for ages {{ages}}. In your name. Backed by the State Bank of Pakistan." />
+
+  <meta property="og:title" content="{{brand}} — {{tagline}}" />
+  <meta property="og:description" content="Pakistan's first teen card. In your name. {{hook}}" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a href="#top" class="brandmark" aria-label="{{brand}} home">
+      <span class="brandmark__dot"></span>{{brand}}
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#parents">For parents</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#waitlist" class="btn btn--primary nav__cta">Claim your spot</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav__drawer" id="navDrawer" hidden>
+    <a href="#how">How it works</a>
+    <a href="#parents">For parents</a>
+    <a href="#faq">FAQ</a>
+    <a href="#waitlist" class="btn btn--primary">Claim your spot</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__copy reveal">
+        <span class="eyebrow"><span class="dot dot--green"></span> Backed by the State Bank of Pakistan</span>
+        <h1 class="hero__title">Your name.<br>Pakistan's first<br><span class="grad">teen card.</span></h1>
+        <p class="hero__sub">
+          You earn. You build. You create. But every payment still lands in
+          someone else's account — because no bank in Pakistan will give you
+          your own. {{brand}} is Pakistan's first card and wallet built for
+          ages {{ages}}. In your name.
+        </p>
+        <div class="hero__actions">
+          <a href="#waitlist" class="btn btn--primary btn--lg">Claim your spot →</a>
+          <a href="#how" class="btn btn--ghost btn--lg">See how it works</a>
+        </div>
+        <p class="microcopy">
+          Spots are capped. First come, first carded.
+          <b><span data-count>{{count}}</span>+ teens</b> already on the waitlist.
+        </p>
+      </div>
+
+      <!-- CSS card mockup -->
+      <div class="hero__card reveal">
+        <div class="card3d">
+          <div class="card3d__chip"></div>
+          <div class="card3d__brand">{{brand}}</div>
+          <div class="card3d__stripe"></div>
+          <div class="card3d__row">
+            <div>
+              <span class="card3d__label">Card holder</span>
+              <span class="card3d__name">Hania Sheikh</span>
+            </div>
+            <div class="card3d__logo">◈◈</div>
+          </div>
+        </div>
+        <div class="hero__badge">In your name — not a guardian's.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM ============ -->
+  <section class="section" id="problem">
+    <div class="wrap two-col">
+      <div class="reveal">
+        <span class="label">The gap nobody has filled</span>
+        <h2 class="h2">You already earned it. Why is it in someone else's account?</h2>
+        <div class="prose">
+          <p>You finished a project for a client in Dubai. Rs. 45,000. Two months of work. It landed in your father's account.</p>
+          <p>Now you need his OTP to renew your hosting. His permission to pay for the tools you need. His patience, every time you want to spend what you already earned.</p>
+          <p><b>He's not the problem. The system is.</b></p>
+          <p>No Pakistani bank, neobank, or telco has ever issued a debit card to someone under 18. Not one — not because the will wasn't there, but because the infrastructure never existed to verify you.</p>
+          <p>In April 2026, the State Bank of Pakistan issued a formal directive: every licensed bank and Electronic Money Institution must now offer teenager accounts for ages {{ages}}. Nobody has built one.</p>
+          <p class="pull">That's {{brand}}.</p>
+        </div>
+      </div>
+
+      <div class="compare reveal">
+        <div class="compare__col compare__col--bad">
+          <span class="compare__tag compare__tag--bad">Without {{brand}}</span>
+          <ul class="flow">
+            <li>Fiverr / Upwork payout</li>
+            <li class="flow__arrow">↓</li>
+            <li>Parent's account <em>(not your name)</em></li>
+            <li class="flow__arrow">↓</li>
+            <li>OTP request → waiting</li>
+            <li class="flow__arrow">↓</li>
+            <li class="flow__end flow__end--bad">Delay · Friction · Depend</li>
+          </ul>
+        </div>
+        <div class="compare__col compare__col--good">
+          <span class="compare__tag compare__tag--good">With {{brand}}</span>
+          <ul class="flow">
+            <li>Fiverr / Upwork payout</li>
+            <li class="flow__arrow">↓</li>
+            <li>Your {{brand}} wallet <em>(your name)</em></li>
+            <li class="flow__arrow">↓</li>
+            <li>Spend. Save. Send.</li>
+            <li class="flow__arrow">↓</li>
+            <li class="flow__end flow__end--good">Done.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOLUTION ============ -->
+  <section class="section section--tint" id="solution">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="label">What {{brand}} gives you</span>
+        <h2 class="h2 center">Your first card. Your first wallet.<br>Your first real relationship with money.</h2>
+      </div>
+      <div class="grid-3">
+        <article class="feature reveal">
+          <div class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/></svg>
+          </div>
+          <h3>Teen Card</h3>
+          <p>A real debit card in your name — not a parent's, not a guardian's. Verified with your NADRA B-Form (Pakistan's under-18 ID). No CNIC required. Works online and in-store.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M16 12.5h3"/><path d="M2.5 9h16a3 3 0 0 1 3 3"/></svg>
+          </div>
+          <h3>Dual-Currency Wallet</h3>
+          <p>Receive international payments straight into your own wallet. Keep earnings in USD for global tools — software, courses, cloud. Convert to PKR when you're ready to spend locally.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Parent Controls</h3>
+          <p>Real-time alerts. Limits you set together. One-tap top-ups. Parents stay informed, you stay in charge. It's not surveillance — it's a safety net.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="label">Three steps to your card</span>
+        <h2 class="h2 center">From the waitlist to your wallet<br>in three steps.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step__num">1</span>
+          <h3>Claim your spot</h3>
+          <p>Join the waitlist with your name, age, and email. You'll get early access before the public launch.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">2</span>
+          <h3>Verify with your B-Form</h3>
+          <p>We use your NADRA B-Form — Pakistan's ID for under-18s. Your identity, your account, no adult proxy needed.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">3</span>
+          <h3>Get your card</h3>
+          <p>Your card is issued in your name and linked to your {{brand}} wallet. Ready to use online and in-store.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ WHO IT'S FOR ============ -->
+  <section class="section section--tint" id="parents">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="label">Who {{brand}} is built for</span>
+        <h2 class="h2 center">You don't have to be earning in dollars to deserve your own card.<br><span class="muted-line">But if you are — this was built for you first.</span></h2>
+      </div>
+      <div class="grid-3 personas">
+        <article class="persona persona--lead reveal">
+          <span class="persona__tag">The Earner</span>
+          <p>You freelance. You create. You tutor. Fiverr, Upwork, YouTube — your money comes from everywhere. It doesn't have to land in someone else's account anymore. A card in your name, a wallet that holds USD and PKR, and the verification to make it legal.</p>
+        </article>
+        <article class="persona reveal">
+          <span class="persona__tag">The Learner</span>
+          <p>You want to buy your own subscriptions. Pay for your own tools. Save toward something that matters. {{brand}} gives you the account to do it — without a parent's card every single time.</p>
+        </article>
+        <article class="persona reveal">
+          <span class="persona__tag">For Parents</span>
+          <p>You want your teen to learn money before the world teaches them the wrong way. {{brand}} puts you in the loop — alerts, limits, full visibility — without putting you in the way. They get independence. You get peace of mind.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REGULATORY ============ -->
+  <section class="section section--dark" id="regulatory">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="label label--onDark">Backed by the State Bank of Pakistan</span>
+        <h2 class="h2 center onDark">This isn't a workaround.<br>It's what the regulator asked for.</h2>
+        <p class="lede onDark reveal">
+          In April 2026, the State Bank of Pakistan issued BPRD Circular No. 01 —
+          requiring all licensed banks, microfinance banks, and Electronic Money
+          Institutions to offer teenager accounts for ages {{ages}}, with full
+          digital onboarding. {{brand}} is built on that foundation — a technology
+          and product layer on top of a licensed EMI. Your wallet is issued, your
+          card is backed, and your money is held by a fully licensed institution.
+        </p>
+      </div>
+      <div class="badges reveal">
+        <span class="badge"><span class="dot dot--green"></span> {{circular}} compliant</span>
+        <span class="badge"><span class="dot dot--green"></span> B-Form / NADRA verified onboarding</span>
+        <span class="badge"><span class="dot dot--green"></span> Licensed EMI partner — card issuance</span>
+        <span class="badge"><span class="dot dot--green"></span> Parental guardian framework built in</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRACTION ============ -->
+  <section class="section" id="traction">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="label">The waitlist is moving</span>
+        <h2 class="h2 center"><span data-count>{{count}}</span> teens on the list.<br>Zero ads spent.</h2>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><span class="stat__num"><span data-count>{{count}}</span>+</span><span class="stat__cap">Teens on waitlist</span></div>
+        <div class="stat"><span class="stat__num">0</span><span class="stat__cap">Ad spend to get there</span></div>
+        <div class="stat"><span class="stat__num">{{launch}}</span><span class="stat__cap">Launch target</span></div>
+      </div>
+      <blockquote class="quote reveal">
+        <p>"I've been getting paid on Fiverr for eight months. Every rupee has gone through my dad's account. I can't wait to have my own."</p>
+        <cite>— Zara, 17, Karachi</cite>
+      </blockquote>
+      <div class="awards reveal">
+        <span>🏆 IBA Karachi Best Innovation Award</span>
+        <span class="awards__sep">·</span>
+        <span>🏆 Junior CEO Pakistan Finalist</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WAITLIST CTA ============ -->
+  <section class="section cta" id="waitlist">
+    <div class="wrap cta__inner">
+      <div class="cta__head reveal">
+        <h2 class="h2 center onDark">Pakistan's first teen card<br>launches {{launch}}.</h2>
+        <p class="lede onDark">We're starting with a limited group. Be among the first to get access.</p>
+      </div>
+
+      <form class="wform reveal" id="waitlistForm" novalidate>
+        <div class="wform__row">
+          <label class="field">
+            <span class="field__label">Full name</span>
+            <input type="text" name="name" autocomplete="name" placeholder="Your full name" required />
+            <span class="field__err" data-err></span>
+          </label>
+          <label class="field field--sm">
+            <span class="field__label">Age</span>
+            <select name="age" required>
+              <option value="" disabled selected>—</option>
+              <option>13</option><option>14</option><option>15</option>
+              <option>16</option><option>17</option><option>18</option>
+              <option value="parent">I'm a parent</option>
+            </select>
+            <span class="field__err" data-err></span>
+          </label>
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required />
+            <span class="field__err" data-err></span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn--primary btn--lg btn--block" id="submitBtn">Claim your spot →</button>
+        <p class="microcopy microcopy--onDark">Spots are capped. First come, first carded. We will never sell your information.</p>
+      </form>
+
+      <div class="wsuccess reveal" id="waitlistSuccess" hidden>
+        <div class="wsuccess__check">✓</div>
+        <h3>You're in. <span id="queuePos">#301</span> on the list.</h3>
+        <p>Share your link — move up the queue.</p>
+        <div class="wsuccess__actions">
+          <button class="btn btn--ghost" id="copyLink">Copy link</button>
+          <a class="btn btn--wa" id="waShare" target="_blank" rel="noopener">Share on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="wrap wrap--narrow">
+      <div class="section__head reveal">
+        <span class="label">Questions</span>
+        <h2 class="h2 center">The important ones, answered.</h2>
+      </div>
+      <div class="faq" id="faqList">
+        <details class="faq__item">
+          <summary>Is this legal for someone under 18 in Pakistan?</summary>
+          <p>Yes. The State Bank of Pakistan's BPRD Circular No. 01 of April 2026 mandates that licensed banks and Electronic Money Institutions offer teenager accounts for ages {{ages}} using NADRA B-Form verification. {{brand}} is built specifically to comply with this framework.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Who actually holds the money? Is it safe?</summary>
+          <p>Your wallet and card are issued and held by a licensed Electronic Money Institution — a regulated financial institution under SBP supervision. {{brand}} is the product and technology layer. We don't hold funds directly; your money sits with a licensed institution.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Do parents have to be involved?</summary>
+          <p>Yes — by design, not restriction. Under Pakistani regulation, a parent or guardian co-signs as the account's legal guardian. They get real-time alerts and can set limits. But the card is in your name, the wallet is controlled by you, and you make the spending decisions.</p>
+        </details>
+        <details class="faq__item">
+          <summary>I'm a freelancer on Fiverr or Upwork. Can I receive payments directly?</summary>
+          <p>Yes — {{brand}} is designed to solve exactly this. Your account is in your name, matching your platform profile, which prevents the identity mismatch that gets accounts flagged when teens route earnings through parent accounts. The dual-currency wallet keeps USD earnings in USD and converts to PKR when you need to spend locally.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Is there a monthly fee?</summary>
+          <p>Basic access is free at launch. A premium subscription becomes available once you're an active user, starting at {{price}}/month. We'll always tell you before anything costs money.</p>
+        </details>
+        <details class="faq__item">
+          <summary>When exactly is the launch?</summary>
+          <p>{{launch}}. Waitlist members get access first, in order of signup. Spots are capped for the initial batch — that's why the list is moving.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <a href="#top" class="brandmark brandmark--footer"><span class="brandmark__dot"></span>{{brand}}</a>
+      <p class="footer__tag">{{tagline}}</p>
+      <a href="mailto:{{email}}" class="footer__mail">{{email}}</a>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <a href="#how">How it works</a>
+      <a href="#parents">For parents</a>
+      <a href="#faq">FAQ</a>
+      <a href="#waitlist">Claim your spot</a>
+    </div>
+    <div>
+      <h4>Regulatory</h4>
+      <p class="footer__fine">
+        {{brand}} is not a bank. Card and wallet services are provided by a
+        licensed Electronic Money Institution regulated by the State Bank of
+        Pakistan. Operating under {{circular}}.
+      </p>
+    </div>
+  </div>
+  <div class="wrap footer__bar">© 2026 {{brand}}. All rights reserved.</div>
+</footer>
+
+<!-- mobile sticky CTA -->
+<a href="#waitlist" class="stickyCta">Claim your spot →</a>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

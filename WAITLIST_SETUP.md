@@ -16,8 +16,12 @@ create table if not exists waitlist (
   name        text not null,
   age         text,
   email       text unique not null,   -- one seat per email (dedupe)
-  ref         text
+  ref         text,                    -- this person's own share code
+  referred_by text                     -- the ref code of whoever invited them
 );
+
+-- already made the table? add the referral column:
+-- alter table waitlist add column if not exists referred_by text;
 
 -- lock it down: only the server (service-role key) can read/write
 alter table waitlist enable row level security;

@@ -21,7 +21,7 @@ export async function GET() {
 
 /* POST /api/waitlist → save a signup, lock a seat, return queue position */
 export async function POST(req: Request) {
-  let body: { name?: string; age?: string; email?: string };
+  let body: { name?: string; age?: string; email?: string; referred_by?: string | null };
   try {
     body = await req.json();
   } catch {
@@ -31,6 +31,7 @@ export async function POST(req: Request) {
   const name = (body.name || "").trim();
   const age = (body.age || "").trim();
   const email = (body.email || "").trim().toLowerCase();
+  const referredBy = (body.referred_by || "").trim() || null;
   if (!name || !age || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ success: false, error: "Missing or invalid fields" }, { status: 422 });
   }
@@ -43,7 +44,7 @@ export async function POST(req: Request) {
   const ref = makeRef();
   const { data, error } = await supabaseAdmin
     .from(TABLE)
-    .insert({ name, age, email, ref })
+    .insert({ name, age, email, ref, referred_by: referredBy })
     .select("id")
     .single();
 

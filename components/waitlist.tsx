@@ -6,11 +6,11 @@ import { brand } from "@/config/brand";
 import { Reveal } from "@/components/ui/reveal";
 import { CountUp } from "@/components/ui/count-up";
 import { Pingo } from "@/components/ui/pingo";
-import { ArrowRight, Check } from "@/components/ui/icons";
+import { ETicket } from "@/components/ui/e-ticket";
+import { ArrowRight } from "@/components/ui/icons";
 
 type Errors = { name?: string; age?: string; email?: string };
 const AGES = ["13", "14", "15", "16", "17", "18", "Parent"];
-const CONFETTI = ["var(--color-red)", "var(--color-gold)", "var(--color-green)", "var(--color-cream)"];
 
 export function Waitlist() {
   const reduce = useReducedMotion();
@@ -20,8 +20,8 @@ export function Waitlist() {
   const [errors, setErrors] = useState<Errors>({});
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState<null | { position: number; ref: string }>(null);
-  const [copied, setCopied] = useState(false);
   const [liveCount, setLiveCount] = useState<number | null>(null);
+  const [referrer, setReferrer] = useState<string | null>(null);
 
   // live "displayed" count from the API (seed + real signups)
   useEffect(() => {
@@ -31,10 +31,13 @@ export function Waitlist() {
       .catch(() => {});
   }, []);
 
-  const shareUrl = done ? `https://${brand.domain}/?ref=${done.ref}` : "";
-  const waHref = done
-    ? `https://wa.me/?text=${encodeURIComponent(`I just joined the ${brand.name} colony — Pakistan's first teen card. Join me: ${shareUrl}`)}`
-    : "";
+  // capture ?ref=... so referrals actually count (who invited this person)
+  useEffect(() => {
+    try {
+      const r = new URLSearchParams(window.location.search).get("ref");
+      if (r) setReferrer(r);
+    } catch {}
+  }, []);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -47,13 +50,13 @@ export function Waitlist() {
     if (Object.keys(next).length) return;
 
     setLoading(true);
-    let position = brand.waitlistSeed + 1;
+    let position = (liveCount ?? brand.waitlistSeed) + 1; // fallback matches the header estimate
     let ref = `${brand.name.toLowerCase().replace(/\s/g, "")}-${Math.random().toString(36).slice(2, 8)}`;
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, age, email }),
+        body: JSON.stringify({ name, age, email, referred_by: referrer }),
       });
       if (res.ok) {
         const json = await res.json();
@@ -196,62 +199,8 @@ export function Waitlist() {
               </motion.p>
             </motion.form>
           ) : (
-            /* ---------- COLONY PASS ---------- */
-            <motion.div
-              key="pass"
-              initial={{ opacity: 0, y: 20, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ type: "spring", stiffness: 220, damping: 20 }}
-              className="relative overflow-hidden rounded-[16px] border-2 border-navy bg-surface text-ink hard-red"
-            >
-              {/* confetti burst */}
-              {!reduce &&
-                Array.from({ length: 16 }).map((_, i) => {
-                  const ang = (i / 16) * Math.PI * 2;
-                  return (
-                    <motion.span
-                      key={i}
-                      className="absolute left-1/2 top-16 h-2 w-2 rounded-[2px]"
-                      style={{ background: CONFETTI[i % CONFETTI.length] }}
-                      initial={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-                      animate={{ x: Math.cos(ang) * 150, y: Math.sin(ang) * 120 - 20, opacity: 0, rotate: 180, scale: 0.5 }}
-                      transition={{ duration: 1, ease: "easeOut" }}
-                    />
-                  );
-                })}
-
-              <div className="relative px-8 pt-8 text-center">
-                <motion.div initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.15 }} className="mx-auto w-fit">
-                  <Pingo size={72} />
-                </motion.div>
-                <h3 className="mt-3 font-display text-[24px] font-black text-navy">You&apos;re in the colony!</h3>
-                <p className="mt-1 text-[14px] text-muted">Welcome aboard. Here&apos;s your pass.</p>
-              </div>
-
-              {/* ticket divider */}
-              <div className="relative my-5 flex items-center">
-                <span className="absolute -left-3 h-6 w-6 rounded-full bg-[var(--color-dark)]" />
-                <span className="absolute -right-3 h-6 w-6 rounded-full bg-[var(--color-dark)]" />
-                <span className="mx-6 flex-1 border-t-2 border-dashed border-line2" />
-              </div>
-
-              <div className="px-8 pb-8 text-center">
-                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">Your spot</span>
-                <div className="font-display text-[52px] font-black leading-none text-red tshadow-navy">
-                  #<CountUp from={brand.waitlistSeed} to={done.position} />
-                </div>
-                <p className="mx-auto mt-3 max-w-[300px] text-[14px] text-ink2">Share your link — every friend who joins moves you up the line.</p>
-                <div className="mt-5 flex flex-wrap justify-center gap-3">
-                  <button
-                    className="btn btn-ghost"
-                    onClick={() => { navigator.clipboard?.writeText(shareUrl).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); }); }}
-                  >
-                    {copied ? <span className="flex items-center gap-1.5"><Check width={16} height={16} /> Copied</span> : "Copy link"}
-                  </button>
-                  <a className="btn btn-wa" href={waHref} target="_blank" rel="noopener noreferrer">Share on WhatsApp</a>
-                </div>
-              </div>
-            </motion.div>
+            /* ---------- WAITLIST E-TICKET (separate component) ---------- */
+            <ETicket key="pass" name={name} position={done.position} refCode={done.ref} />
           )}
         </AnimatePresence>
       </div>

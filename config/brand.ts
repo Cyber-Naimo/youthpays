@@ -17,6 +17,7 @@ export const brand = {
   // --- Launch + traction ---
   launch: "Soon",
   waitlistSeed: 300, // starting queue number shown after signup
+  batchCap: 500, // founding-batch size — drives the "seats left" FOMO bar
   price: "Rs. 99", // premium subscription / month
 
   // --- Regulatory ---

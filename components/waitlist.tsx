@@ -74,6 +74,7 @@ export function Waitlist() {
     } catch {}
     setLoading(false);
     setDone({ position, ref });
+    setLiveCount(position); // keep header + FOMO in sync with the assigned seat
   }
 
   const container = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } };
@@ -109,8 +110,29 @@ export function Waitlist() {
           <h2 className="h2 mt-3 text-white">Join Pingo&apos;s herd.</h2>
           <p className="mt-3 text-[16px]" style={{ color: "rgba(250,247,239,.72)" }}>
             Be the first penguin. Launching {brand.launch}. You&apos;ll be around{" "}
-            <b className="text-gold">#<CountUp from={brand.waitlistSeed} to={(liveCount ?? brand.waitlistSeed) + 1} /></b>.
+            <b className="text-gold">#<CountUp from={brand.waitlistSeed} to={done ? done.position : (liveCount ?? brand.waitlistSeed) + 1} /></b>.
           </p>
+
+          {/* FOMO — founding batch filling up */}
+          {(() => {
+            const claimed = liveCount ?? brand.waitlistSeed;
+            const left = Math.max(0, brand.batchCap - claimed);
+            const pct = Math.min(100, Math.round((claimed / brand.batchCap) * 100));
+            return (
+              <div className="mx-auto mt-6 max-w-[380px]">
+                <div className="mb-1.5 flex items-center justify-between text-[12px] font-bold">
+                  <span className="flex items-center gap-1.5 text-red">
+                    <span className="h-2 w-2 animate-pulse rounded-full bg-red" /> Filling fast
+                  </span>
+                  <span className="text-cream/70">Only <b className="text-gold">{left}</b> seats left</span>
+                </div>
+                <div className="h-2.5 w-full overflow-hidden rounded-full border border-cream/15 bg-white/5">
+                  <motion.div className="h-full rounded-full bg-gold" initial={{ width: 0 }} whileInView={{ width: `${pct}%` }} viewport={{ once: true }} transition={{ duration: 1, ease: "easeOut" }} />
+                </div>
+                <p className="mt-1.5 text-[11px] text-cream/50">{claimed} of {brand.batchCap} founding seats claimed</p>
+              </div>
+            );
+          })()}
         </Reveal>
 
         <AnimatePresence mode="wait">

@@ -83,7 +83,7 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
           <AnimatePresence>
             {capturing && (
               <>
-                <motion.div key="flash" className="pointer-events-none absolute inset-0 z-40 rounded-[16px] bg-white" initial={{ opacity: 0 }} animate={{ opacity: [0, 0.9, 0] }} transition={{ duration: 0.5, times: [0, 0.35, 1] }} />
+                <motion.div key="flash" className="pointer-events-none absolute inset-0 z-40 rounded-none bg-white" initial={{ opacity: 0 }} animate={{ opacity: [0, 0.9, 0] }} transition={{ duration: 0.5, times: [0, 0.35, 1] }} />
                 <motion.div key="cheese" className="pointer-events-none absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
                   initial={{ scale: 0, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 16 }}>
                   <Pingo size={70} />
@@ -103,7 +103,7 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
               animate={{ rotateY: 0, opacity: 1 }}
               exit={reduce ? { opacity: 0 } : { rotateY: 90, opacity: 0 }}
               transition={{ duration: 0.32, ease: "easeInOut" }}
-              className="absolute inset-0 flex items-stretch overflow-hidden rounded-[16px] border-2 border-navy hard-red"
+              className="absolute inset-0 flex items-stretch overflow-hidden rounded-none border-2 border-navy hard-red"
             >
               {/* warm gradient */}
               <div className="absolute inset-0" style={{ background: "linear-gradient(135deg,#f7c948 0%,#f2a83c 40%,#e2622a 74%,#d62828 100%)" }} />
@@ -148,7 +148,7 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
               animate={{ rotateY: 0, opacity: 1 }}
               exit={reduce ? { opacity: 0 } : { rotateY: -90, opacity: 0 }}
               transition={{ duration: 0.32, ease: "easeInOut" }}
-              className="absolute inset-0 flex flex-col overflow-hidden rounded-[16px] border-2 border-navy hard-red"
+              className="absolute inset-0 flex flex-col overflow-hidden rounded-none border-2 border-navy hard-red"
             >
               <div className="absolute inset-0" style={{ background: "linear-gradient(135deg,#f7c948 0%,#f2a83c 40%,#e2622a 74%,#d62828 100%)" }} />
               <div className="absolute inset-0 mix-blend-overlay" style={{ opacity: 0.2, backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "140px 140px" }} />

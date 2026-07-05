@@ -10,13 +10,6 @@ import { Check } from "@/components/ui/icons";
 const CONFETTI = ["var(--color-red)", "var(--color-gold)", "var(--color-green)", "var(--color-cream)"];
 const AUTO_FLIP_MS = 4000;
 
-const faceBase: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  backfaceVisibility: "hidden",
-  WebkitBackfaceVisibility: "hidden",
-};
-
 
 export function ETicket({ name, position, refCode }: { name: string; position: number; refCode: string }) {
   const reduce = useReducedMotion();
@@ -28,7 +21,7 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
   const frontRef = useRef<HTMLDivElement>(null);
 
   const shareUrl = `https://${brand.domain}/?ref=${refCode}`;
-  const waHref = `https://wa.me/?text=${encodeURIComponent(`I just booked my seat on ${brand.name} — Pakistan's first teen card. Grab yours: ${shareUrl}`)}`;
+  const waHref = `https://wa.me/?text=${encodeURIComponent(`I just booked my seat on ${brand.name}. Pakistan's first teen card. Grab yours: ${shareUrl}`)}`;
   const copy = () => navigator.clipboard?.writeText(shareUrl).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
 
   // capture the ticket front as a PNG and share it (or download as fallback)
@@ -45,7 +38,7 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
       const dataUrl = await toPng(node, { pixelRatio: 2.5, cacheBust: true, backgroundColor: "#101124" });
       const blob = await (await fetch(dataUrl)).blob();
       const file = new File([blob], `${brand.name}-ticket.png`, { type: "image/png" });
-      const text = `I booked seat #${position} on ${brand.name} — Pakistan's first teen card. Reserve yours: ${shareUrl}`;
+      const text = `I booked seat #${position} on ${brand.name}. Pakistan's first teen card. Reserve yours: ${shareUrl}`;
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({ files: [file], title: `${brand.name} waitlist`, text });
       } else {
@@ -100,10 +93,18 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
             )}
           </AnimatePresence>
 
-          <motion.div className="relative h-[264px] w-full" style={{ transformStyle: "preserve-3d" }} animate={{ rotateY: flip ? 180 : 0 }} transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 120, damping: 18 }}>
-
-            {/* ============ FRONT — campaign pass ============ */}
-            <div ref={frontRef} style={{ ...faceBase, pointerEvents: flip ? "none" : "auto" }} className="relative flex items-stretch overflow-hidden rounded-[16px] border-2 border-navy hard-red">
+          <div className="relative h-[264px] w-full" style={{ perspective: 1200 }}>
+            <AnimatePresence initial={false}>
+              {!flip ? (
+            <motion.div
+              key="front"
+              ref={frontRef}
+              initial={reduce ? false : { rotateY: -90, opacity: 0 }}
+              animate={{ rotateY: 0, opacity: 1 }}
+              exit={reduce ? { opacity: 0 } : { rotateY: 90, opacity: 0 }}
+              transition={{ duration: 0.32, ease: "easeInOut" }}
+              className="absolute inset-0 flex items-stretch overflow-hidden rounded-[16px] border-2 border-navy hard-red"
+            >
               {/* warm gradient */}
               <div className="absolute inset-0" style={{ background: "linear-gradient(135deg,#f7c948 0%,#f2a83c 40%,#e2622a 74%,#d62828 100%)" }} />
               {/* grain */}
@@ -139,10 +140,16 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
                 <span className="font-display text-[14px] font-black uppercase tracking-[0.28em] text-navy" style={{ writingMode: "vertical-rl" }}>Admit One</span>
                 <span className="font-display text-[13px] font-black text-navy" style={{ writingMode: "vertical-rl" }}>#{position}</span>
               </div>
-            </div>
-
-            {/* ============ BACK — same skin as front ============ */}
-            <div style={{ ...faceBase, transform: "rotateY(180deg)", pointerEvents: flip ? "auto" : "none" }} className="relative flex flex-col overflow-hidden rounded-[16px] border-2 border-navy hard-red">
+            </motion.div>
+              ) : (
+            <motion.div
+              key="back"
+              initial={reduce ? false : { rotateY: 90, opacity: 0 }}
+              animate={{ rotateY: 0, opacity: 1 }}
+              exit={reduce ? { opacity: 0 } : { rotateY: -90, opacity: 0 }}
+              transition={{ duration: 0.32, ease: "easeInOut" }}
+              className="absolute inset-0 flex flex-col overflow-hidden rounded-[16px] border-2 border-navy hard-red"
+            >
               <div className="absolute inset-0" style={{ background: "linear-gradient(135deg,#f7c948 0%,#f2a83c 40%,#e2622a 74%,#d62828 100%)" }} />
               <div className="absolute inset-0 mix-blend-overlay" style={{ opacity: 0.2, backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "140px 140px" }} />
 
@@ -155,7 +162,7 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
                 <div className="flex flex-1 flex-col justify-center py-1 text-center">
                   <h3 className="font-display text-[18px] font-black leading-tight text-navy">Share your pass.</h3>
                   <p className="mx-auto mt-1.5 max-w-[240px] text-[12.5px] font-medium leading-[1.45] text-navy/80">
-                    Post it on your stories, get noticed — you might get featured on ours.
+                    Post it on your stories, get noticed, you might get featured on ours.
                   </p>
                 </div>
 
@@ -188,8 +195,10 @@ export function ETicket({ name, position, refCode }: { name: string; position: n
                   </a>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* caption */}

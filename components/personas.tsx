@@ -20,7 +20,7 @@ const who: P[] = [
     line: "You earn online, in your own name.",
     points: [
       "Sells on Fiverr, or takes clients abroad",
-      "Paid in dollars, tired of it landing in Dad's account",
+      "Gets paid online, tired of it landing in Dad's account",
       "Wants a card to pay for tools and subscriptions",
     ],
   },

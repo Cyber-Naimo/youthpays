@@ -41,7 +41,7 @@ export const brand = {
   cardBack: {
     features: [
       "Works online and in shops",
-      "Holds USD and PKR",
+      "Send, receive, and spend",
       "In your name, not a guardian's",
     ],
     cvv: "221",
